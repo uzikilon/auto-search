@@ -1,0 +1,34 @@
+<h1>Select your vehicle</h1>
+<form (submit)="validate()">
+  <mat-form-field class="example-full-width">
+    <input type="text" placeholder="Manufacturer" matInput [formControl]="manufacturer.control" [matAutocomplete]="autoManufacturer">
+    <mat-autocomplete #autoManufacturer="matAutocomplete" [displayWith]="manufacturer.displayFn" (optionSelected)="manufacturer.optionSelected($event.option.value)">
+      <mat-option *ngFor="let option of manufacturer.filteredOptions | async" [value]="option">
+        {{option.Mfr_Name}}
+      </mat-option>
+    </mat-autocomplete>
+  </mat-form-field>
+
+  <mat-form-field class="example-full-width">
+    <input type="text" placeholder="Make" matInput [formControl]="make.control" [matAutocomplete]="autoMake">
+    <mat-autocomplete #autoMake="matAutocomplete" [displayWith]="make.displayFn" (optionSelected)="make.optionSelected($event.option.value)">
+      <mat-option *ngFor="let option of make.filteredOptions | async" [value]="option">
+        {{option.Make_Name}}
+      </mat-option>
+    </mat-autocomplete>
+  </mat-form-field>
+
+  <mat-form-field class="example-full-width">
+    <input type="text" placeholder="Model" matInput [formControl]="model.control" [matAutocomplete]="autoModel">
+    <mat-autocomplete #autoModel="matAutocomplete" [displayWith]="model.displayFn" (optionSelected)="model.optionSelected($event.option.value)">
+      <mat-option *ngFor="let option of model.filteredOptions | async" [value]="option">
+        {{option.Model_Name}}
+      </mat-option>
+    </mat-autocomplete>
+  </mat-form-field>
+
+  <button mat-raised-button color="primary" type="submit">Submit</button>
+
+  <h2 *ngIf="valid">Thank you for submitting the data!</h2>
+
+</form>
